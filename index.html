@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Carte Pokémon 3D</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/hero.css">
+  <script src="assets/js/script.js" defer></script>
+  <script src="assets/js/project.js" defer></script>
+</head>
+<body class="min-h-screen overflow-x-hidden font-sans text-white">
+
+  <!-- ========== ACCUEIL : carte 3D ========== -->
+  <section class="hero">
+
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+
+  <div class="hero-layout">
+
+    <!-- ===== Texte à gauche ===== -->
+    <header class="hero-text">
+      <p class="availability">
+        <span class="availability-dot"></span>
+        Disponible pour un stage dès le 26 avril
+      </p>
+
+      <h1 class="hero-title bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+        Léonin, <br>développeur web 
+      </h1>
+
+      <p class="hero-lead">
+        20 ans, étudiant en Bachelor à La Manu. Je cherche un stage de 12 semaine pour concevoir des applications web sécurisées, du front jusqu'à la base de données.
+      </p>
+
+      <ul class="tech-pills" aria-label="Technologies">
+        <li class="is-main">PHP</li>
+        <li>MySQL</li>
+        <li>JavaScript</li>
+        <li>HTML / CSS</li>
+        <li>Git</li>
+      </ul>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="assets/cv-leonin.pdf" download>Télécharger mon CV</a>
+        <a class="btn btn-secondary" <a></a>>Me contacter</a>
+      </div>
+
+      <ul class="hero-links">
+        <li><a href="https://github.com/ton-pseudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ton-profil" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      </ul>
+    </header>
+
+    <!-- ===== Carte à droite ===== -->
+    <div class="hero-card">
+  <main class="card-container z-10" style="position:relative">
+    <div class="card-inner">
+
+      <!-- FACE AVANT -->
+      <div class="card-face card-front">
+
+        <!-- Intérieur gris -->
+        <div class="card-frame">
+
+          <div class="card-shine"><div class="holo-glare"></div></div>
+
+          <!-- En-tête -->
+          <div class="card-header pop-out">
+            <span class="card-stage">BASE</span>
+            <h2 class="card-name">Léonin</h2>
+            <span class="card-hp"><small>Age</small>20</span>
+            <span class="energy energy-metal" title="Métal"></span>
+          </div>
+
+          <!-- Illustration -->
+          <div class="card-art pop-out">
+            <img class="card-art-img" src="assets/img/codeur.jpeg" alt="Illustration : codeur" draggable="false">
+          </div>
+          <div class="card-info">N° 385 Pokémon Souhait</div>
+
+          <!-- Compétence -->
+          <section class="move pop-out-sm">
+            <div class="move-head">
+              <span class="move-tag move-tag-ability">Compétence</span>
+              <h3 class="move-name move-name-ability">Codage</h3>
+            </div>
+            <p class="move-text">
+              Je maîtrise le <strong>HTML</strong>, le <strong>CSS</strong>, le <strong>JavaScript</strong> et le <strong>PHP</strong>. De la structure de la page jusqu'au serveur, je conçois des sites complets, dynamiques et adaptés à tous les écrans.
+            </p>
+          </section>
+
+          <!-- Attaque -->
+          <section class="move pop-out-sm">
+            <div class="move-head">
+              <span class="move-cost">
+                <span class="energy energy-psychic"></span>
+                <span class="energy energy-fighting"></span>
+                <span class="energy energy-metal"></span>
+              </span>
+              <h3 class="move-name">Axe d'amélioration</h3>
+            </div>
+            <p class="move-text">
+              Je souhaite progresser sur plusieurs points : le <strong>Python</strong>, la <strong>sécurité web</strong>, et la compréhension des <strong>attaques</strong> pour réussir à les contrer.
+            </p>
+          </section>
+          <!-- Soft skills -->
+          <section class="move pop-out-sm">
+            <div class="move-head">
+              <span class="move-cost">
+                <span class="energy energy-grass"></span>
+                <span class="energy energy-colorless"></span>
+              </span>
+              <h3 class="move-name">Soft skills</h3>
+            </div>
+            <p class="move-text">
+              <strong>Curieux</strong>, <strong>autonome</strong> et <strong>rigoureux</strong>. J'aime travailler en <strong>équipe</strong>, gérer un projet de A à Z et apprendre vite en conditions réelles.
+            </p>
+          </section>
+
+          <!-- Faiblesse / Résistance / Retraite -->
+          <div class="card-stats">
+            <div class="stat">
+              <span class="stat-label">Faiblesse</span>
+              <span class="energy energy-fire"></span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Résistance</span>
+              <span class="energy energy-grass"></span>
+            </div>
+          </div>
+
+          <!-- Pied de carte -->
+          <footer class="card-footer">
+            <span class="card-illus">Illus. Léonin</span>
+            <span class="card-number"><b class="card-reg">D</b>1/1</span>
+          </footer>
+
+        </div>
+      </div>
+
+      <!-- FACE ARRIÈRE -->
+      <div class="card-face card-back">
+        <img class="card-back-img" src="assets/img/back-cartes-internationales.webp" alt="Dos de carte Pokémon" draggable="false">
+      </div>
+
+    </div>
+  </main>
+      <p class="card-hint">Passe la souris sur la carte pour l'animer, clique pour la retourner.</p>
+    </div>
+
+  </div>
+
+  <a href="#projets" class="scroll-link">Voir mes projets ↓</a>
+
+  </section>
+
+  <!-- ========== PROJETS : cartes générées par assets/projects.js ========== -->
+  <section id="projets" class="projects">
+    <h2 class="projects-title">Mes projets</h2>
+    <p class="projects-subtitle">Passe la souris sur une carte pour la retourner, clique pour ouvrir le projet.</p>
+    <div id="projects-grid" class="projects-grid"></div>
+  </section>
+
+</body>
+</html>

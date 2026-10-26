@@ -1,0 +1,224 @@
+/* ==========================================================
+   HERO : fond + mise en page autour de la carte
+   (à charger APRÈS style.css)
+   ========================================================== */
+:root {
+  --bg: #0b1020;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --blue: #60a5fa;
+  --violet: #a855f7;
+  --ok: #4ade80;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(96, 165, 250, 0.18), transparent 50%),
+    radial-gradient(ellipse at 90% 40%, rgba(168, 85, 247, 0.16), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem 3rem;
+  overflow: hidden;
+}
+
+/* Grille de points + blobs flous, très discrets */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+.blob {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.blob-1 { width: 380px; height: 380px; top: -80px; left: -80px; background: #3b82f6; }
+.blob-2 { width: 420px; height: 420px; bottom: -120px; right: -100px; background: #9333ea; }
+
+.hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 5rem;
+  width: 100%;
+  max-width: 1080px;
+}
+
+/* ---------- Texte à gauche ---------- */
+.hero-text { text-align: left; }
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  color: #d1fae5;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 999px;
+}
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .availability-dot { animation: pulse 2s infinite; }
+}
+@keyframes pulse {
+  70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.hero-title {
+  margin-bottom: 1rem;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.hero-lead {
+  max-width: 34rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  list-style: none;
+}
+.tech-pills li {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+.tech-pills li.is-main {
+  color: #fff;
+  background: rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: transform 0.15s, background 0.15s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  box-shadow: 0 8px 24px -8px rgba(147, 51, 234, 0.7);
+}
+.btn-secondary {
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.08); }
+
+.hero-links {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+}
+.hero-links a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s;
+}
+.hero-links a:hover { color: #fff; }
+
+.btn:focus-visible,
+.hero-links a:focus-visible,
+.scroll-link:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* ---------- Carte à droite + lueur ---------- */
+.hero-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.hero-card::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.55), rgba(168, 85, 247, 0.25) 45%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.card-hint {
+  position: relative;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.scroll-link {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.scroll-link:hover { color: #fff; }
+
+/* ---------- Mobile / tablette ---------- */
+@media (max-width: 900px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    justify-items: center;
+  }
+  .hero-text { text-align: center; }
+  .hero-lead { margin-inline: auto; }
+  .tech-pills, .hero-actions, .hero-links { justify-content: center; }
+}
