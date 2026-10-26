@@ -222,3 +222,63 @@ body {
   .hero-lead { margin-inline: auto; }
   .tech-pills, .hero-actions, .hero-links { justify-content: center; }
 }
+
+/* ==========================================================
+   CONTACT
+   ========================================================== */
+.contact {
+  padding: 4rem 1.5rem 6rem;
+  text-align: center;
+}
+.contact-title {
+  margin-bottom: 0.75rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #60a5fa, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.contact-subtitle { margin-bottom: 2rem; color: var(--muted); }
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.75rem;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+.field { display: grid; gap: 0.35rem; }
+.field label { font-size: 0.9rem; font-weight: 600; color: #e2e8f0; }
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  color: #fff;
+  background: rgba(11, 16, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.field textarea { min-height: 140px; resize: vertical; }
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 1px;
+}
+.contact-form .btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+.contact-form .btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+/* anti-spam : champ invisible pour les humains */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-status { min-height: 1.4rem; font-size: 0.95rem; }
+.form-status.is-ok { color: var(--ok); }
+.form-status.is-error { color: #fca5a5; }
+
+.contact-alt { margin-top: 1.5rem; color: var(--muted); }
+.contact-alt a { color: #fff; text-underline-offset: 4px; }

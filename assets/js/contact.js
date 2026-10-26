@@ -3,7 +3,7 @@
    1. Va sur https://web3forms.com, saisis ton email, tu reçois une clé par mail.
    2. Colle-la ci-dessous. Cette clé est publique : elle peut rester dans le code.
    ========================================================== */
-const WEB3FORMS_KEY = 'COLLE_TA_CLE_ICI';
+const WEB3FORMS_KEY = '4f1111be-9807-4777-9f4f-8c83e5084a3f';
 
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
@@ -17,7 +17,7 @@ const setStatus = (text, type) => {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  if (WEB3FORMS_KEY === 'COLLE_TA_CLE_ICI') {
+  if (!WEB3FORMS_KEY) {
     setStatus("Le formulaire n'est pas encore configuré : ajoute ta clé dans assets/contact.js.", 'error');
     return;
   }

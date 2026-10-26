@@ -11,6 +11,7 @@
   <script src="assets/js/project.js" defer></script>
 </head>
 <body class="min-h-screen overflow-x-hidden font-sans text-white">
+ 
 
   <!-- ========== ACCUEIL : carte 3D ========== -->
   <section class="hero">
@@ -46,7 +47,7 @@
 
       <div class="hero-actions">
         <a class="btn btn-primary" href="assets/cv-leonin.pdf" download>Télécharger mon CV</a>
-        <a class="btn btn-secondary" <a></a>>Me contacter</a>
+        <a class="btn btn-secondary" href="#contact">Me contacter</a>
       </div>
 
       <ul class="hero-links">
@@ -165,5 +166,31 @@
     <div id="projects-grid" class="projects-grid"></div>
   </section>
 
-</body>
+ <!-- ========== CONTACT ========== -->
+  <section id="contact" class="contact">
+    <h2 class="contact-title">Me contacter</h2>
+    <p class="contact-subtitle">Un stage à proposer, une question ? Écris-moi, je réponds vite.</p>
+
+    <form id="contact-form" class="contact-form">
+      <div class="field">
+        <label for="name">Nom</label>
+        <input id="name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <!-- anti-spam : ne pas remplir -->
+      <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn-primary" type="submit">Envoyer le message</button>
+      <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="contact-alt">Tu préfères l'email ? <a href="mailto:ton.email@exemple.fr">ton.email@exemple.fr</a></p>
+  </section>
+
 </html>
