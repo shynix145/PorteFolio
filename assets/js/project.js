@@ -127,7 +127,8 @@ const renderProject = (p, index, total) => `
 const grid = document.getElementById('projects-grid');
 grid.innerHTML = projects.map((p, i) => renderProject(p, i, projects.length)).join('');
 
-/* ---------- Écrans tactiles : 1er tap = retourner, 2e tap = ouvrir ---------- */
+//Écrans tactiles : 1er tap = retourner, 2e tap = ouvrir
+
 if (window.matchMedia('(hover: none)').matches) {
   grid.addEventListener('click', (e) => {
     const card = e.target.closest('.project');
