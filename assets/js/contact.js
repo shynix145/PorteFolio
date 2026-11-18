@@ -38,9 +38,9 @@ form.addEventListener('submit', async (e) => {
     const json = await res.json();
     if (!json.success) throw new Error(json.message);
     form.reset();
-    setStatus('Message envoyé, merci ! Je te réponds rapidement.', 'ok');
+    setStatus('Message envoyé, merci ! Je vous réponds rapidement.', 'ok');
   } catch (err) {
-    setStatus("L'envoi a échoué. Réessaie, ou écris-moi directement par email.", 'error');
+    setStatus("L'envoi a échoué. Réessayez, ou écrivez-moi directement par email.", 'error');
   } finally {
     submitBtn.disabled = false;
   }

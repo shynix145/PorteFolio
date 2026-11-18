@@ -3,194 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Carte Pokémon 3D</title>
+  <title>Léonin Charron, développeur web en recherche de stage</title>
+  <meta name="description" content="Portfolio de Léonin, 20 ans, étudiant en Bachelor à La Manu, à la recherche d'un stage de 12 semaines en développement web.">
+  <script>
+    /* Mode jour / nuit : appliqué tout de suite pour éviter un flash.
+       Nuit par défaut ; si le visiteur a déjà choisi avec le bouton, on reprend son choix. */
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var night = saved !== 'day';
+      document.documentElement.dataset.theme = night ? 'night' : 'day';
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/hero.css">
+  <link rel="stylesheet" href="assets/sections.css">
+  <script src="assets/js/background.js" defer></script>
   <script src="assets/js/script.js" defer></script>
   <script src="assets/js/project.js" defer></script>
+  <script src="assets/js/contact.js" defer></script>
 </head>
-<body class="min-h-screen overflow-x-hidden font-sans text-white">
- 
+<body class="min-h-screen overflow-x-hidden">
+
+  <!-- Fond interactif : étoiles reliées qui réagissent à la souris / au doigt -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="site-nav" aria-label="Navigation principale">
+    <a href="#accueil" class="nav-logo">Léonin<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#a-propos">À propos</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+      <li>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Passer en mode nuit">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.4 14.6A8.5 8.5 0 0 1 9.4 3.6a.6.6 0 0 0-.8-.7 9.5 9.5 0 1 0 12.5 12.5.6.6 0 0 0-.7-.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
 
   <!-- ========== ACCUEIL : carte 3D ========== -->
-  <section class="hero">
+  <section id="accueil" class="hero">
 
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="blob blob-1" aria-hidden="true"></div>
-  <div class="blob blob-2" aria-hidden="true"></div>
+    <div class="hero-layout">
 
-  <div class="hero-layout">
+      <!-- ===== Texte à gauche ===== -->
+      <header class="hero-text">
+        <p class="availability">
+          <span class="availability-dot"></span>
+          Disponible pour un stage dès le 26 avril
+        </p>
 
-    <!-- ===== Texte à gauche ===== -->
-    <header class="hero-text">
-      <p class="availability">
-        <span class="availability-dot"></span>
-        Disponible pour un stage dès le 26 avril
-      </p>
+        <h1 class="hero-title">
+          Léonin,<br>développeur web
+        </h1>
 
-      <h1 class="hero-title bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-        Léonin, <br>développeur web 
-      </h1>
+        <p class="hero-lead">
+          20 ans, étudiant en Bachelor à La Manu. Je cherche un stage de <strong>12 semaines</strong> pour concevoir des applications web sécurisées, du front jusqu'à la base de données.
+        </p>
 
-      <p class="hero-lead">
-        20 ans, étudiant en Bachelor à La Manu. Je cherche un stage de 12 semaine pour concevoir des applications web sécurisées, du front jusqu'à la base de données.
-      </p>
+        <ul class="tech-pills" aria-label="Technologies">
+          <li class="is-main">PHP</li>
+          <li>MySQL</li>
+          <li>JavaScript</li>
+          <li>HTML / CSS</li>
+          <li>Git</li>
+        </ul>
 
-      <ul class="tech-pills" aria-label="Technologies">
-        <li class="is-main">PHP</li>
-        <li>MySQL</li>
-        <li>JavaScript</li>
-        <li>HTML / CSS</li>
-        <li>Git</li>
-      </ul>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="assets/cv-leonin.pdf" download>Télécharger mon CV</a>
+          <a class="btn btn-secondary" href="#contact">Me contacter</a>
+        </div>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="assets/cv-leonin.pdf" download>Télécharger mon CV</a>
-        <a class="btn btn-secondary" href="#contact">Me contacter</a>
+        <ul class="hero-links">
+          <li><a href="https://github.com/ton-pseudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/ton-profil" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </header>
+
+      <!-- ===== Carte à droite ===== -->
+      <div class="hero-card">
+        <div class="card-container" role="button" tabindex="0" aria-label="Carte de présentation : appuie pour la retourner">
+          <div class="card-inner">
+
+            <!-- FACE AVANT -->
+            <!-- "is-fullart" = illustration sur toute la carte. Enlève ce mot pour revenir à la carte classique. -->
+            <div class="card-face card-front is-fullart">
+              <div class="card-frame">
+
+                <div class="card-shine"><div class="holo-glare"></div></div>
+
+                <!-- En-tête -->
+                <div class="card-header pop-out">
+                  <span class="card-stage">BASE</span>
+                  <h2 class="card-name">Léonin</h2>
+                  <span class="card-hp"><small>Age</small>20</span>
+                  <span class="energy energy-metal" title="Métal"></span>
+                </div>
+
+                <!-- Illustration -->
+                <div class="card-art pop-out">
+                  <img class="card-art-img" src="assets/img/codeur.webp" alt="Illustration : codeur" draggable="false">
+                </div>
+                <div class="card-info">N° 385&ensp;Pokémon Souhait&ensp;Taille : 1,70 m&ensp;Poids : 60 kg</div>
+
+                <!-- Compétence -->
+                <section class="move pop-out-sm">
+                  <div class="move-head">
+                    <span class="move-tag move-tag-ability">Compétence</span>
+                    <h3 class="move-name move-name-ability">Codage</h3>
+                  </div>
+                  <p class="move-text">
+                    Je maîtrise le <strong>HTML</strong>, le <strong>CSS</strong>, le <strong>JavaScript</strong> et le <strong>PHP</strong>. De la structure de la page jusqu'au serveur, je conçois des sites complets, dynamiques et adaptés à tous les écrans.
+                  </p>
+                </section>
+
+                <!-- Attaque -->
+                <section class="move pop-out-sm">
+                  <div class="move-head">
+                    <span class="move-cost">
+                      <span class="energy energy-psychic"></span>
+                      <span class="energy energy-fighting"></span>
+                      <span class="energy energy-metal"></span>
+                    </span>
+                    <h3 class="move-name">Axe d'amélioration</h3>
+                  </div>
+                  <p class="move-text">
+                    Je souhaite progresser sur plusieurs points : le <strong>Python</strong>, la <strong>sécurité web</strong>, et la compréhension des <strong>attaques</strong> pour réussir à les contrer.
+                  </p>
+                </section>
+
+                <!-- Soft skills -->
+                <section class="move pop-out-sm">
+                  <div class="move-head">
+                    <span class="move-cost">
+                      <span class="energy energy-grass"></span>
+                      <span class="energy energy-colorless"></span>
+                    </span>
+                    <h3 class="move-name">Soft skills</h3>
+                  </div>
+                  <p class="move-text">
+                    <strong>Curieux</strong>, <strong>autonome</strong> et <strong>rigoureux</strong>. J'aime travailler en <strong>équipe</strong>, gérer un projet de A à Z et apprendre vite en conditions réelles.
+                  </p>
+                </section>
+
+                <!-- Faiblesse / Résistance -->
+                <div class="card-stats">
+                  <div class="stat">
+                    <span class="stat-label">Faiblesse</span>
+                    <span class="energy energy-fire"></span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Résistance</span>
+                    <span class="energy energy-grass"></span>
+                  </div>
+                </div>
+
+                <!-- Pied de carte -->
+                <footer class="card-footer">
+                  <span class="card-illus">Illus. Léonin</span>
+                  <span class="card-number"><b class="card-reg">D</b>1/1</span>
+                </footer>
+
+              </div>
+            </div>
+
+            <!-- FACE ARRIÈRE -->
+            <div class="card-face card-back">
+              <img class="card-back-img" src="assets/img/back-cartes-internationales.webp" alt="Dos de carte Pokémon" draggable="false">
+            </div>
+
+          </div>
+        </div>
+        <p class="card-hint">Bougez la souris (ou le doigt) sur la carte, cliquez pour la retourner.</p>
       </div>
 
-      <ul class="hero-links">
-        <li><a href="https://github.com/ton-pseudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/ton-profil" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-      </ul>
-    </header>
+    </div>
 
-    <!-- ===== Carte à droite ===== -->
-    <div class="hero-card">
-  <main class="card-container z-10" style="position:relative">
-    <div class="card-inner">
+  </section>
 
-      <!-- FACE AVANT -->
-      <div class="card-face card-front">
+  <!-- ========== À PROPOS ========== -->
+  <section id="a-propos" class="about">
+    <div class="wrap">
+      <h2 class="section-title">À propos</h2>
+      <p class="section-subtitle">Ce que je fais, ce que je cherche, et où je veux aller.</p>
 
-        <!-- Intérieur gris -->
-        <div class="card-frame">
+      <div class="about-layout">
+        <div class="about-text">
+          <p>Je suis étudiant en Bachelor développement web à La Manu. J'y apprends à construire des applications complètes, de l'interface jusqu'à la base de données.</p>
+          <p>Je veux progresser en Python et en sécurité web : comprendre les attaques pour mieux protéger les applications que je développe.</p>
+        </div>
 
-          <div class="card-shine"><div class="holo-glare"></div></div>
-
-          <!-- En-tête -->
-          <div class="card-header pop-out">
-            <span class="card-stage">BASE</span>
-            <h2 class="card-name">Léonin</h2>
-            <span class="card-hp"><small>Age</small>20</span>
-            <span class="energy energy-metal" title="Métal"></span>
-          </div>
-
-          <!-- Illustration -->
-          <div class="card-art pop-out">
-            <img class="card-art-img" src="assets/img/codeur.jpeg" alt="Illustration : codeur" draggable="false">
-          </div>
-          <div class="card-info">N° 385 Pokémon Souhait</div>
-
-          <!-- Compétence -->
-          <section class="move pop-out-sm">
-            <div class="move-head">
-              <span class="move-tag move-tag-ability">Compétence</span>
-              <h3 class="move-name move-name-ability">Codage</h3>
-            </div>
-            <p class="move-text">
-              Je maîtrise le <strong>HTML</strong>, le <strong>CSS</strong>, le <strong>JavaScript</strong> et le <strong>PHP</strong>. De la structure de la page jusqu'au serveur, je conçois des sites complets, dynamiques et adaptés à tous les écrans.
-            </p>
-          </section>
-
-          <!-- Attaque -->
-          <section class="move pop-out-sm">
-            <div class="move-head">
-              <span class="move-cost">
-                <span class="energy energy-psychic"></span>
-                <span class="energy energy-fighting"></span>
-                <span class="energy energy-metal"></span>
-              </span>
-              <h3 class="move-name">Axe d'amélioration</h3>
-            </div>
-            <p class="move-text">
-              Je souhaite progresser sur plusieurs points : le <strong>Python</strong>, la <strong>sécurité web</strong>, et la compréhension des <strong>attaques</strong> pour réussir à les contrer.
-            </p>
-          </section>
-          <!-- Soft skills -->
-          <section class="move pop-out-sm">
-            <div class="move-head">
-              <span class="move-cost">
-                <span class="energy energy-grass"></span>
-                <span class="energy energy-colorless"></span>
-              </span>
-              <h3 class="move-name">Soft skills</h3>
-            </div>
-            <p class="move-text">
-              <strong>Curieux</strong>, <strong>autonome</strong> et <strong>rigoureux</strong>. J'aime travailler en <strong>équipe</strong>, gérer un projet de A à Z et apprendre vite en conditions réelles.
-            </p>
-          </section>
-
-          <!-- Faiblesse / Résistance / Retraite -->
-          <div class="card-stats">
-            <div class="stat">
-              <span class="stat-label">Faiblesse</span>
-              <span class="energy energy-fire"></span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Résistance</span>
-              <span class="energy energy-grass"></span>
-            </div>
-          </div>
-
-          <!-- Pied de carte -->
-          <footer class="card-footer">
-            <span class="card-illus">Illus. Léonin</span>
-            <span class="card-number"><b class="card-reg">D</b>1/1</span>
-          </footer>
-
+        <div class="fiche">
+          <h3>Le stage que je cherche</h3>
+          <dl>
+            <div><dt>Durée</dt><dd>12 semaines</dd></div>
+            <div><dt>Début</dt><dd>dès le 26 avril</dd></div>
+            <div><dt>Domaine</dt><dd>Développement web</dd></div>
+          </dl>
         </div>
       </div>
 
-      <!-- FACE ARRIÈRE -->
-      <div class="card-face card-back">
-        <img class="card-back-img" src="assets/img/back-cartes-internationales.webp" alt="Dos de carte Pokémon" draggable="false">
+      <div class="fiche fiche-row">
+        <h3>Ma stack</h3>
+        <dl>
+          <div><dt>Front</dt><dd>HTML, CSS, JavaScript</dd></div>
+          <div><dt>Back</dt><dd>PHP</dd></div>
+          <div><dt>Base de données</dt><dd>MySQL</dd></div>
+          <div><dt>Outils</dt><dd>Git, GitHub</dd></div>
+          <div class="is-learning"><dt>En apprentissage</dt><dd>Python, sécurité web</dd></div>
+        </dl>
       </div>
-
     </div>
-  </main>
-      <p class="card-hint">Passe la souris sur la carte pour l'animer, clique pour la retourner.</p>
-    </div>
-
-  </div>
-
-  <a href="#projets" class="scroll-link">Voir mes projets ↓</a>
-
   </section>
 
-  <!-- ========== PROJETS : cartes générées par assets/projects.js ========== -->
+  <!-- ========== PROJETS : cartes générées par assets/js/project.js ========== -->
   <section id="projets" class="projects">
-    <h2 class="projects-title">Mes projets</h2>
-    <p class="projects-subtitle">Passe la souris sur une carte pour la retourner, clique pour ouvrir le projet.</p>
-    <div id="projects-grid" class="projects-grid"></div>
+    <div class="wrap">
+      <h2 class="section-title">Mes projets</h2>
+      <p class="section-subtitle">
+        Les cartes sont face cachée : touchez-les pour les découvrir, puis cliquez pour ouvrir le projet.
+      </p>
+      <div class="projects-toolbar">
+        <span id="projects-counter" class="projects-counter" aria-live="polite"></span>
+        <button id="reveal-all" class="btn-ghost" type="button">Tout retourner</button>
+      </div>
+      <div id="projects-grid" class="projects-grid"></div>
+    </div>
   </section>
 
- <!-- ========== CONTACT ========== -->
+  <!-- ========== CONTACT ========== -->
   <section id="contact" class="contact">
-    <h2 class="contact-title">Me contacter</h2>
-    <p class="contact-subtitle">Un stage à proposer, une question ? Écris-moi, je réponds vite.</p>
+    <div class="wrap contact-layout">
+      <div>
+        <h2 class="section-title">Me contacter</h2>
+        <p class="section-subtitle">Un stage à proposer, une question ? Écrivez-moi, je réponds vite.</p>
+        <p class="contact-alt">Vous préférez l'email ? <a href="mailto:leonin.charron28@gmail.com">leonin.charron28@gmail.com</a></p>
+      </div>
 
-    <form id="contact-form" class="contact-form">
-      <div class="field">
-        <label for="name">Nom</label>
-        <input id="name" name="name" type="text" autocomplete="name" required>
-      </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
-      </div>
-      <div class="field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      <!-- anti-spam : ne pas remplir -->
-      <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="btn btn-primary" type="submit">Envoyer le message</button>
-      <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-    </form>
-
-    <p class="contact-alt">Tu préfères l'email ? <a href="mailto:leonin.charron28@gmail.com">leonin.charron28@gmail.com</a></p>
+      <form id="contact-form" class="contact-form">
+        <div class="field">
+          <label for="name">Nom</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <!-- anti-spam : ne pas remplir -->
+        <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-primary" type="submit">Envoyer le message</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </section>
 
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Léonin Charron. Fait en HTML, CSS et JavaScript.</p>
+    <a href="#accueil">Retour en haut ↑</a>
+  </footer>
+
+</body>
 </html>

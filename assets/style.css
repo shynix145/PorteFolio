@@ -25,7 +25,7 @@
   border-radius: 16px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 40px -18px rgba(16, 26, 60, 0.45), 0 2px 6px rgba(16, 26, 60, 0.12);
   transform-style: preserve-3d;
 }
 
@@ -34,7 +34,7 @@
    ========================================================== */
 .card-front {
   padding: 9px;
-  background: var(--card-border, #99a7b4ff);   /* bordure jaune */
+  background: var(--card-border, #99a7b4ff);   /* bordure */
   color: #1f1f1f;
 }
 
@@ -194,7 +194,7 @@
 /* ---------- Faiblesse / Résistance / Retraite ---------- */
 .card-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   margin: auto -4px 0;
   padding: 2px 6px;
   background: linear-gradient(180deg, #f1f1f1, #b5b5b5);
@@ -333,6 +333,73 @@
   backface-visibility: hidden;
 }
 /* ==========================================================
+   CARTE "FULL ART" (classe is-fullart sur .card-front)
+   L'illustration couvre toute la carte, le texte passe par-dessus.
+   ========================================================== */
+.is-fullart .card-frame {
+  background: #0c1020;
+  color: #fff;
+}
+
+/* L'illustration devient le fond de la carte */
+.is-fullart .card-art {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  transform: none;
+}
+.is-fullart .card-art-img { object-position: 86% center; }   /* cadrage : garde le personnage */
+
+/* Voile sombre en haut et en bas pour que le texte reste lisible */
+.is-fullart .card-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 9, 20, 0.7) 0%,
+    rgba(6, 9, 20, 0) 16%,
+    rgba(6, 9, 20, 0) 42%,
+    rgba(6, 9, 20, 0.82) 57%,
+    rgba(6, 9, 20, 0.94) 100%
+  );
+}
+
+/* Tout le contenu passe au-dessus de l'illustration */
+.is-fullart .card-info,
+.is-fullart .card-stats,
+.is-fullart .card-footer {
+  position: relative;
+  z-index: 1;
+}
+.is-fullart .card-info {
+  margin-top: auto;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.14);
+}
+.is-fullart .card-name,
+.is-fullart .card-hp,
+.is-fullart .move-name,
+.is-fullart .move-text,
+.is-fullart .stat-label,
+.is-fullart .card-footer {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+.is-fullart .move-name-ability { color: #ffcb05; }
+.is-fullart .move-text strong { color: #ffe27a; }
+.is-fullart .card-stats {
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+}
+.is-fullart .card-reg { border-color: #fff; }
+
+/* ==========================================================
    SECTION PROJETS
    (cartes qui se retournent seulement : pas d'inclinaison 3D)
    ========================================================== */
@@ -373,33 +440,99 @@
   text-align: left;
   color: inherit;
   outline: none;
-  --card-texture: 0;
+  cursor: pointer;
   --card-bg-light: #c4c4c4;
   --card-bg-dark: #c4c4c4;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* Distribution des cartes à l'arrivée dans l'écran */
+.projects-grid .project {
+  opacity: 0;
+  transform: translateY(40px) scale(0.92);
+}
+.projects-grid.is-dealt .project {
+  animation: deal 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) var(--deal-delay, 0ms) forwards;
+}
+@keyframes deal {
+  to { opacity: 1; transform: none; }
+}
 
+/* Au départ : FACE CACHÉE (on voit le dos de la carte) */
 .project-inner {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform: rotateY(180deg);
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1), translate 0.3s ease;
 }
 
-/* Retournement : survol, focus clavier, ou tap (mobile, voir projects.js) */
-.project:hover .project-inner,
-.project:focus-visible .project-inner,
-.project.is-flipped .project-inner {
-  transform: rotateY(180deg);
+/* Carte face cachée : elle "appelle" le survol */
+.project:not(.is-revealed):hover .project-inner,
+.project:not(.is-revealed):focus-visible .project-inner {
+  translate: 0 -8px;
+}
+.project:not(.is-revealed) .card-back {
+  transition: box-shadow 0.3s;
+}
+.project:not(.is-revealed):hover .card-back {
+  box-shadow: 0 0 0 3px #ffcb05, 0 22px 44px -18px rgba(16, 26, 60, 0.55);
+}
+
+/* Une fois touchée : la carte se retourne et RESTE face visible */
+.project.is-revealed .project-inner {
+  transform: rotateY(0deg);
+}
+.project.is-revealed:hover .project-inner {
+  translate: 0 -6px;
+}
+.project.is-revealed:hover .holo-glare {
+  opacity: 0.8;
 }
 
 .project:focus-visible .card-face {
-  box-shadow: 0 0 0 3px #60a5fa, 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 3px #2447c6, 0 18px 40px -18px rgba(16, 26, 60, 0.45);
 }
 
 .project .card-footer {
   margin-top: 6px;
+}
+
+/* Étiquette "Touchez-moi" sur le dos */
+.card-back-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  white-space: nowrap;
+  background: rgba(16, 26, 60, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-back-hint { animation: hint-bob 2.2s ease-in-out infinite; }
+}
+@keyframes hint-bob {
+  50% { transform: translate(-50%, -4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-inner { transition-duration: 0.01s; }
+  .projects-grid .project { opacity: 1; transform: none; }
+  .projects-grid.is-dealt .project { animation: none; }
+}
+
+/* Petits téléphones : on réduit légèrement les cartes */
+@media (max-width: 380px) {
+  .projects-grid { grid-template-columns: 1fr; justify-items: center; }
+  .project, .card-container { zoom: 0.88; }
 }
 
 /* Technologies */
