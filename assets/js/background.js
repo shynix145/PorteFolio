@@ -13,7 +13,7 @@
     maxStars: 90,
     linkDistance: 150,     // distance max pour relier deux étoiles
     mouseRadius: 190,      // rayon d'influence de la souris
-    speed: 0.25,
+    speed: 0.04,           // vitesse de dérive (plus petit = plus lent)
   };
 
   const canvas = document.getElementById('bg-canvas');
@@ -97,7 +97,7 @@
       const dy = s.y - e.clientY;
       const dist = Math.hypot(dx, dy) || 1;
       if (dist < 220) {
-        const force = ((220 - dist) / 220) * 5;
+        const force = ((220 - dist) / 220) * 1.2;
         s.vx += (dx / dist) * force;
         s.vy += (dy / dist) * force;
       }
@@ -118,7 +118,7 @@
         const dy = pointer.y - s.y;
         const dist = Math.hypot(dx, dy);
         if (dist < SETTINGS.mouseRadius && dist > 1) {
-          const pull = (1 - dist / SETTINGS.mouseRadius) * 0.025;
+          const pull = (1 - dist / SETTINGS.mouseRadius) * 0.004;
           s.vx += (dx / dist) * pull;
           s.vy += (dy / dist) * pull;
         }
@@ -174,7 +174,7 @@
     // étoiles (elles scintillent légèrement)
     for (const s of stars) {
       const near = pointer.active && Math.hypot(s.x - pointer.x, s.y - pointer.y) < SETTINGS.mouseRadius;
-      const twinkle = 0.85 + 0.15 * Math.sin(time * 0.002 + s.phase);
+      const twinkle = 0.85 + 0.15 * Math.sin(time * 0.0008 + s.phase);
       ctx.fillStyle = `rgba(${starColor},${(near ? 1 : 0.85) * strength})`;
       drawStar(s.x, s.y, (near ? s.r + 1.5 : s.r) * twinkle, s.rot);
     }
